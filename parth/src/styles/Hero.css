@@ -1,0 +1,191 @@
+/* hero.css - Complete Updated Code */
+
+.hero {
+  padding: 100px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+  min-height: 85vh;
+  background-color: #ffffff;
+}
+
+.hero-content {
+  max-width: 650px;
+  flex: 1;
+}
+
+.hero-image {
+  flex-shrink: 0;
+}
+
+.hero-image img {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #e0f2fe;
+  box-shadow: 0 10px 40px rgba(76, 139, 245, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.05);
+}
+
+.hero h1 {
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.hero h1 span {
+  color: #3b82f6;
+}
+
+.hero h3 {
+  margin-top: 20px;
+  font-size: 28px;
+  font-weight: 400;
+  color: #6b6b6b;
+}
+
+.hero p {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #8b8b8b;
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+.hero-buttons {
+  margin-top: 45px;
+  display: flex;
+  gap: 20px;
+}
+
+.primary-btn {
+  background-color: #4c8bf5;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.primary-btn:hover {
+  background-color: #3b7fe5;
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 2px solid #d1d5db;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.secondary-btn:hover {
+  border-color: #9ca3af;
+  color: #4c8bf5;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hero {
+    padding: 80px 60px;
+    gap: 60px;
+  }
+
+  .hero-image img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 968px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 60px 40px;
+    gap: 40px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 40px 30px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero h3 {
+    font-size: 20px;
+  }
+
+  .hero-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Add this to your existing hero.css */
+
+.cursor {
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}

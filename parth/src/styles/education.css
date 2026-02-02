@@ -1,0 +1,130 @@
+.education {
+  padding: 100px 120px;
+  background-color: #fafafa;
+}
+
+.education-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.education-title {
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 80px;
+}
+
+.education-card {
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.education-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
+  border-color: #4c8bf5;
+}
+
+.education-header {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.education-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #eff6ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.education-info h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.university-name {
+  font-size: 16px;
+  color: #4c8bf5;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.education-date {
+  font-size: 15px;
+  color: #8b8b8b;
+  margin: 0;
+}
+
+.education-details {
+  padding-left: 80px;
+}
+
+.education-details p {
+  font-size: 16px;
+  color: #4a4a4a;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.education-details .label {
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+.education-focus {
+  margin-bottom: 12px;
+}
+
+.education-coursework {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .education {
+    padding: 80px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .education {
+    padding: 60px 30px;
+  }
+
+  .education-title {
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+
+  .education-card {
+    padding: 30px;
+    margin-bottom: 20px;
+  }
+
+  .education-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .education-info h3 {
+    font-size: 20px;
+  }
+
+  .education-details {
+    padding-left: 0;
+  }
+}

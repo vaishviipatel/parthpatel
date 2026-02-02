@@ -1,0 +1,121 @@
+.services {
+  padding: 100px 120px;
+  background-color: #ffffff;
+}
+
+.services-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.services-title {
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 80px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.service-card {
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 50px 35px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: #4c8bf5;
+  box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
+}
+
+/* Active/Clicked state with realistic blue shadow */
+.service-card:active {
+  border-color: #4c8bf5;
+  box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
+  transform: translateY(-5px);
+}
+
+/* For maintaining active state (if you want to toggle it with JavaScript) */
+.service-card.active {
+  border-color: #4c8bf5;
+  box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
+}
+
+.service-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #eff6ff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  background-color: #4c8bf5;
+}
+
+.service-card:hover .service-icon svg {
+  stroke: #ffffff;
+}
+
+.service-card h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  font-size: 16px;
+  color: #6b6b6b;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .services {
+    padding: 80px 60px;
+  }
+
+  .services-grid {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 968px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .services {
+    padding: 60px 30px;
+  }
+
+  .services-title {
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .service-card {
+    padding: 40px 30px;
+  }
+}
