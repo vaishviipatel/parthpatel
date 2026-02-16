@@ -17,8 +17,8 @@ const Services = () => {
               </svg>
             </div>
             <h3>Data Analytics</h3>
-            <p>Clean, responsive, and user-friendly interfaces built with React.js, HTML, CSS, and modern JavaScript.</p>
-          </div>
+            <p>Transform raw data into actionable insights using Python, SQL, and visualization.</p>
+           </div>
 
           {/* Machine Learning - Brain Logo */}
           <div className="service-card">
@@ -29,8 +29,8 @@ const Services = () => {
               </svg>
             </div>
             <h3>Machine Learning</h3>
-            <p>Scalable and secure REST APIs using Node.js, Express, and MySQL for real-world applications.</p>
-          </div>
+            <p>Build predictive models and intelligent systems using scikit-learn, and advanced ML algorithms.</p>
+            </div>
 
           {/* Deep Learning - Robot Face Logo */}
           <div className="service-card">
@@ -44,7 +44,7 @@ const Services = () => {
               </svg>
             </div>
             <h3>Deep Learning</h3>
-            <p>Designing user-friendly and modern interfaces using Figma, focusing on usability, consistency, and visual clarity.</p>
+            <p>Develop neural networks for computer vision, NLP, and complex pattern recognition using  TensorFlow and Keras.</p>
           </div>
         </div>
       </div>

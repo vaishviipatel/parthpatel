@@ -5,7 +5,7 @@ const Hero = () => {
   const [typedText, setTypedText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
   const fullText = "Data Science Intern | Kaggler";
-  const typingSpeed = 100; // milliseconds per character
+  const typingSpeed = 100;
 
   useEffect(() => {
     let currentIndex = 0;
@@ -16,7 +16,7 @@ const Hero = () => {
         currentIndex++;
       } else {
         clearInterval(typingInterval);
-        setShowCursor(false); // Hide cursor when typing is done
+        setShowCursor(false);
       }
     }, typingSpeed);
 
@@ -76,7 +76,9 @@ const Hero = () => {
       </div>
 
       <div className="hero-image">
-        <img src="/images/p.jpeg" alt="Parth Patel" />
+        <div className="image-container">
+          <img src="/images/p.jpeg" alt="Parth Patel" />
+        </div>
       </div>
     </section>
   );

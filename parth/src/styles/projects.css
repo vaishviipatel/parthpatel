@@ -107,7 +107,6 @@
   min-width: 160px;
 }
 
-.btn-live-demo,
 .btn-github,
 .btn-kaggle {
   display: flex;
@@ -124,25 +123,15 @@
   text-decoration: none;
 }
 
-.btn-live-demo {
-  background-color: #4c8bf5;
+.btn-github {
+  background-color: #1a1a1a;
   color: white;
 }
 
-.btn-live-demo:hover {
-  background-color: #3b7fe5;
-  transform: translateY(-2px);
-}
-
-.btn-github {
-  background-color: transparent;
-  color: #1a1a1a;
-  border: 2px solid #e5e7eb;
-}
-
 .btn-github:hover {
-  border-color: #1a1a1a;
+  background-color: #2d2d2d;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.3);
 }
 
 .btn-kaggle {
@@ -153,6 +142,7 @@
 .btn-kaggle:hover {
   background-color: #1aa3d6;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(32, 190, 255, 0.3);
 }
 
 /* Responsive Design */
@@ -174,7 +164,6 @@
     flex-wrap: wrap;
   }
 
-  .btn-live-demo,
   .btn-github,
   .btn-kaggle {
     flex: 1;
@@ -212,7 +201,6 @@
     flex-direction: column;
   }
 
-  .btn-live-demo,
   .btn-github,
   .btn-kaggle {
     width: 100%;

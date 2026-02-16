@@ -52,7 +52,7 @@ const Skills = () => {
             </div>
              <div className="skill-card">
               <h4>NLP</h4>
-              <p>Text processing, sentiment analysis, language models</p>
+              <p>Text processing, Tfidf, BOW</p>
             </div>
           </div>
         </div>

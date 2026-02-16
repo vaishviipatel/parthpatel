@@ -82,6 +82,8 @@
   padding-left: 25px;
   position: relative;
   margin-bottom: 10px;
+  text-align: justify; /* Added justified alignment */
+  text-justify: inter-word; /* Better word spacing */
 }
 
 .experience-responsibilities li:before {
@@ -128,6 +130,8 @@
   padding-left: 25px;
   position: relative;
   margin-bottom: 12px;
+  text-align: justify; /* Added justified alignment */
+  text-justify: inter-word; /* Better word spacing */
 }
 
 .working-list li:before {
@@ -173,4 +177,10 @@
   .currently-working h3 {
     font-size: 20px;
   }
+
+  .experience-responsibilities li,
+  .working-list li {
+    text-align: left;
+  }
 }
+

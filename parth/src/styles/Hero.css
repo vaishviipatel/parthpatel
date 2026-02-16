@@ -1,5 +1,3 @@
-/* hero.css - Complete Updated Code */
-
 .hero {
   padding: 100px 120px;
   display: flex;
@@ -8,31 +6,62 @@
   gap: 80px;
   min-height: 85vh;
   background-color: #ffffff;
+  overflow: hidden;
 }
 
 .hero-content {
   max-width: 650px;
   flex: 1;
+  z-index: 2;
 }
 
-.hero-image {
+/* Image Styling Improvements */
+.hero-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-shrink: 0;
 }
 
+.hero-image-gradient {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.hero-image {
+  position: relative;
+  z-index: 2;
+  animation: float 6s ease-in-out infinite;
+}
+
 .hero-image img {
-  width: 350px;
-  height: 350px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #e0f2fe;
-  box-shadow: 0 10px 40px rgba(76, 139, 245, 0.2);
-  transition: transform 0.3s ease;
+  object-position: top; /* Ensures your face isn't cut off */
+  border: 8px solid #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .hero-image img:hover {
-  transform: scale(1.05);
+  transform: scale(1.03) rotate(2deg);
 }
 
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Text Styles */
 .hero h1 {
   font-size: 68px;
   font-weight: 700;
@@ -48,18 +77,20 @@
 .hero h3 {
   margin-top: 20px;
   font-size: 28px;
-  font-weight: 400;
-  color: #6b6b6b;
+  font-weight: 500;
+  color: #4b5563;
+  min-height: 35px; /* Prevents layout jump while typing */
 }
 
 .hero p {
   margin-top: 25px;
   font-size: 18px;
-  color: #8b8b8b;
+  color: #6b7280;
   line-height: 1.7;
-  max-width: 650px;
+  max-width: 550px;
 }
 
+/* Button Styles */
 .hero-buttons {
   margin-top: 45px;
   display: flex;
@@ -67,125 +98,74 @@
 }
 
 .primary-btn {
-  background-color: #4c8bf5;
+  background-color: #3b82f6;
   color: white;
   border: none;
   padding: 16px 32px;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: background-color 0.3s ease;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
 }
 
 .primary-btn:hover {
-  background-color: #3b7fe5;
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.23);
 }
 
 .secondary-btn {
-  background: transparent;
-  border: 2px solid #d1d5db;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
   padding: 16px 32px;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 16px;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-weight: 600;
+  color: #374151;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: border-color 0.3s ease, color 0.3s ease;
+  gap: 10px;
+  transition: all 0.3s ease;
 }
 
 .secondary-btn:hover {
-  border-color: #9ca3af;
-  color: #4c8bf5;
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #111827;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .hero {
-    padding: 80px 60px;
-    gap: 60px;
-  }
-
-  .hero-image img {
-    width: 300px;
-    height: 300px;
-  }
-}
-
-@media (max-width: 968px) {
-  .hero {
-    flex-direction: column-reverse;
-    text-align: center;
-    padding: 60px 40px;
-    gap: 40px;
-  }
-
-  .hero-content {
-    max-width: 100%;
-  }
-
-  .hero h1 {
-    font-size: 48px;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-  }
-
-  .hero-image img {
-    width: 250px;
-    height: 250px;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero {
-    padding: 40px 30px;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .hero h3 {
-    font-size: 20px;
-  }
-
-  .hero-image img {
-    width: 200px;
-    height: 200px;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .primary-btn,
-  .secondary-btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* Add this to your existing hero.css */
-
+/* Cursor Animation */
 .cursor {
   animation: blink 1s step-end infinite;
-  margin-left: 2px;
+  color: #3b82f6;
+  font-weight: bold;
 }
 
 @keyframes blink {
-  0%, 50% {
-    opacity: 1;
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero { padding: 80px 40px; gap: 40px; }
+  .hero h1 { font-size: 52px; }
+  .hero-image img { width: 300px; height: 300px; }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 60px 20px;
   }
-  51%, 100% {
-    opacity: 0;
-  }
+  .hero-content { display: flex; flex-direction: column; align-items: center; }
+  .hero-image-gradient { width: 300px; height: 300px; }
+  .hero-buttons { width: 100%; flex-direction: column; }
 }

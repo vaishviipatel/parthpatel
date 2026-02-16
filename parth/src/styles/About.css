@@ -27,7 +27,8 @@
   font-size: 19px;
   line-height: 1.7;
   color: #4a4a4a;
-  text-align: left;
+  text-align: justify; /* Changed from left to justify */
+  text-justify: inter-word; /* Better word spacing */
   margin: 0;
   text-indent: 0;
 }
