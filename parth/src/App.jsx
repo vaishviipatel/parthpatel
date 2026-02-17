@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Services from "./components/Services";
+import Services from "./components/services";
 import About from "./components/About";
 import Skills from "./components/skills";
 import Projects from "./components/Projects";
