@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaLinkedin, FaGithub, FaKaggle } from 'react-icons/fa';
-import "../styles/contact.css";
+import "../styles/Contact.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({

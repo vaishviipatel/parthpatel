@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../styles/hero.css";
+import "../styles/Hero.css";
 
 const Hero = () => {
   const [typedText, setTypedText] = useState("");
