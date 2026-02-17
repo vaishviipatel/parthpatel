@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import "../styles/navbar.css";
+import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home');
