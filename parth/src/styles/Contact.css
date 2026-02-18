@@ -86,15 +86,25 @@
   padding: 12px 14px;
   display: flex;
   align-items: center;
-  gap: 12px;  
+  gap: 12px;
   transition: all 0.3s ease;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .contact-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(76, 139, 245, 0.15);
   border-color: #4c8bf5;
+}
+
+.contact-card:hover .contact-value {
+  color: #2563eb;
+}
+
+.email-card:hover {
+  background-color: #f0f7ff;
 }
 
 .contact-icon {
@@ -115,6 +125,7 @@
 
 .contact-details {
   flex: 1;
+  min-width: 0; /* prevents text overflow */
 }
 
 .contact-label {
@@ -128,6 +139,9 @@
   color: #1a1a1a;
   font-weight: 500;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* truncate long emails/URLs on small screens */
 }
 
 /* Send a Message Form */
@@ -172,6 +186,8 @@
   color: #1a1a1a;
   font-family: inherit;
   transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-input:focus,
@@ -206,6 +222,7 @@
   gap: 10px;
   transition: all 0.3s ease;
   margin-top: 10px;
+  width: 100%;
 }
 
 .form-submit-btn:hover {
@@ -213,84 +230,7 @@
   box-shadow: 0 4px 14px rgba(76, 139, 245, 0.25);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .contact {
-    padding: 80px 60px;
-  }
-
-  .contact-content {
-    gap: 40px;
-  }
-}
-
-@media (max-width: 968px) {
-  .contact-content {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-}
-
-@media (max-width: 640px) {
-  .contact {
-    padding: 60px 30px;
-  }
-
-  .contact-title {
-    font-size: 36px;
-  }
-
-  .contact-header {
-    margin-bottom: 50px;
-  }
-
-  .contact-info h3,
-  .contact-form-wrapper h3 {
-    font-size: 24px;
-  }
-
-  .contact-form-wrapper {
-    padding: 30px;
-  }
-
-  .contact-card {
-    padding: 16px;
-  }
-  
-  .contact-icon {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .contact-value {
-    font-size: 15px;
-  }
-}
-
-/* Make contact cards look like buttons when clickable */
-.contact-card {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.contact-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(76, 139, 245, 0.15);
-  border-color: #4c8bf5;
-}
-
-/* Special hover for email card (slightly stronger visual cue) */
-.email-card:hover {
-  background-color: #f0f7ff;
-}
-
-/* Ensure text stays readable on hover */
-.contact-card:hover .contact-value {
-  color: #2563eb;
-}
+/* Kaggle button */
 .btn-kaggle {
   display: inline-flex;
   align-items: center;
@@ -311,4 +251,224 @@
   background-color: #ccc;
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE — all screen sizes
+   ══════════════════════════════════ */
+
+/* Large desktops */
+@media (max-width: 1400px) {
+  .contact {
+    padding: 80px 80px;
+  }
+}
+
+/* Medium desktops / laptops */
+@media (max-width: 1200px) {
+  .contact {
+    padding: 80px 60px;
+  }
+
+  .contact-content {
+    gap: 40px;
+  }
+
+  .contact-title {
+    font-size: 42px;
+  }
+}
+
+/* Tablets landscape */
+@media (max-width: 1024px) {
+  .contact {
+    padding: 70px 50px;
+  }
+
+  .contact-title {
+    font-size: 38px;
+  }
+
+  .contact-content {
+    gap: 30px;
+  }
+}
+
+/* Tablets portrait — stack to single column */
+@media (max-width: 968px) {
+  .contact {
+    padding: 60px 40px;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-title {
+    font-size: 36px;
+  }
+
+  .contact-subtitle {
+    font-size: 16px;
+  }
+}
+
+/* Large phones */
+@media (max-width: 768px) {
+  .contact {
+    padding: 60px 30px;
+  }
+
+  .contact-title {
+    font-size: 34px;
+  }
+
+  .contact-header {
+    margin-bottom: 40px;
+  }
+
+  .contact-info h3,
+  .contact-form-wrapper h3 {
+    font-size: 22px;
+  }
+
+  .contact-form-wrapper {
+    padding: 24px;
+  }
+
+  .contact-card {
+    padding: 14px;
+  }
+
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* Standard phones */
+@media (max-width: 640px) {
+  .contact {
+    padding: 50px 20px;
+  }
+
+  .contact-title {
+    font-size: 30px;
+  }
+
+  .contact-subtitle {
+    font-size: 15px;
+  }
+
+  .contact-header {
+    margin-bottom: 35px;
+  }
+
+  .contact-info h3,
+  .contact-form-wrapper h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .contact-form-wrapper {
+    padding: 20px;
+  }
+
+  .contact-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .contact-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .contact-value {
+    font-size: 13px;
+  }
+
+  .contact-label {
+    font-size: 11px;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .form-submit-btn {
+    font-size: 14px;
+    padding: 11px 18px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .contact {
+    padding: 45px 16px;
+  }
+
+  .contact-title {
+    font-size: 26px;
+  }
+
+  .contact-subtitle {
+    font-size: 14px;
+  }
+
+  .contact-form-wrapper {
+    padding: 16px;
+  }
+
+  .contact-cards {
+    gap: 10px;
+  }
+
+  .contact-card {
+    padding: 10px 12px;
+  }
+
+  .contact-value {
+    font-size: 12px;
+  }
+}
+
+/* Very small phones (iPhone SE etc.) */
+@media (max-width: 380px) {
+  .contact {
+    padding: 40px 14px;
+  }
+
+  .contact-title {
+    font-size: 24px;
+  }
+
+  .contact-form-wrapper {
+    padding: 14px;
+  }
+
+  .contact-card {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .contact-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .contact-value {
+    font-size: 11px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .contact-card,
+  .form-submit-btn {
+    transition: none;
+  }
 }

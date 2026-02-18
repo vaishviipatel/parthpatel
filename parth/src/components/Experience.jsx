@@ -1,13 +1,56 @@
+import { useEffect, useRef } from "react";
 import "../styles/experience.css";
 
 const Experience = () => {
+  const titleRef = useRef(null);
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    // Title fade in
+    const titleObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          titleObserver.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (titleRef.current) titleObserver.observe(titleRef.current);
+
+    // Cards slide in
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) cardObserver.observe(card);
+    });
+
+    return () => {
+      titleObserver.disconnect();
+      cardObserver.disconnect();
+    };
+  }, []);
+
   return (
     <section className="experience" id="experience">
       <div className="experience-container">
-        <h2 className="experience-title">Experience</h2>
+        <h2 className="experience-title" ref={titleRef}>Experience</h2>
 
-        {/* Work Experience Card */}
-        <div className="experience-card">
+        {/* Work Experience Card — slides from LEFT */}
+        <div
+          className="experience-card slide-left"
+          ref={(el) => (cardRefs.current[0] = el)}
+        >
           <div className="experience-header">
             <div className="experience-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4c8bf5" strokeWidth="2">
@@ -23,7 +66,7 @@ const Experience = () => {
           </div>
 
           <ul className="experience-responsibilities">
-            <li> Developed enterprise-grade fraud detection system using ensemble ML models (Random Forest, Isolation Forest, XGBoost) achieving 85%+ accuracy with 5% false positives</li>
+            <li>Developed enterprise-grade fraud detection system using ensemble ML models (Random Forest, Isolation Forest, XGBoost) achieving 85%+ accuracy with 5% false positives</li>
             <li>Architected FastAPI-based RESTful API with real-time processing pipeline handling 1000+ TPS at sub-100ms latency</li>
             <li>Implemented priority-based alert management system with automated workflows and feedback loops, reducing investigation time by 40%</li>
             <li>Designed interactive Streamlit dashboard with Plotly visualizations for real-time monitoring and case management</li>
@@ -31,8 +74,11 @@ const Experience = () => {
           </ul>
         </div>
 
-        {/* Currently Working On Card */}
-        <div className="currently-working">
+        {/* Currently Working On — slides from RIGHT */}
+        <div
+          className="currently-working slide-right"
+          ref={(el) => (cardRefs.current[1] = el)}
+        >
           <h3>Currently Working On</h3>
           <ul className="working-list">
             <li>Building scalable data pipelines for real-time analytics</li>
@@ -40,6 +86,7 @@ const Experience = () => {
             <li>Developing automated data validation and quality assurance systems</li>
           </ul>
         </div>
+
       </div>
     </section>
   );

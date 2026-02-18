@@ -8,28 +8,72 @@
   margin: 0 auto;
 }
 
+/* ── Title ── */
 .experience-title {
   font-size: 48px;
   font-weight: 700;
   text-align: center;
   color: #1a1a1a;
   margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
-.experience-card {
-  background-color: #ffffff;
-  border: 2px solid #e5e7eb;
+.experience-title.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════
+   CARDS — slide left / right
+   ══════════════════════════════════ */
+
+.experience-card,
+.currently-working {
   border-radius: 16px;
   padding: 40px;
   margin-bottom: 40px;
-  transition: all 0.3s ease;
   cursor: pointer;
+  transition:
+    transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
-.experience-card:hover {
+/* Experience card — from LEFT */
+.slide-left {
+  opacity: 0;
+  transform: translateX(-160px);
+}
+
+/* Currently working — from RIGHT */
+.slide-right {
+  opacity: 0;
+  transform: translateX(160px);
+  transition-delay: 0.3s;
+}
+
+/* Both settle to center */
+.slide-left.animate-in,
+.slide-right.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Hover (after settled) ── */
+.experience-card.animate-in:hover,
+.currently-working.animate-in:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
   border-color: #4c8bf5;
+}
+
+/* ── Card specific styles ── */
+.experience-card {
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
 }
 
 .experience-header {
@@ -82,8 +126,8 @@
   padding-left: 25px;
   position: relative;
   margin-bottom: 10px;
-  text-align: justify; /* Added justified alignment */
-  text-justify: inter-word; /* Better word spacing */
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .experience-responsibilities li:before {
@@ -95,19 +139,10 @@
   left: 0;
 }
 
+/* ── Currently Working styles ── */
 .currently-working {
   background-color: #f8f9fa;
   border: 2px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 40px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.currently-working:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
-  border-color: #4c8bf5;
 }
 
 .currently-working h3 {
@@ -130,8 +165,8 @@
   padding-left: 25px;
   position: relative;
   margin-bottom: 12px;
-  text-align: justify; /* Added justified alignment */
-  text-justify: inter-word; /* Better word spacing */
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .working-list li:before {
@@ -143,13 +178,46 @@
   left: 0;
 }
 
-/* Responsive Design */
+/* ══════════════════════════════════
+   RESPONSIVE — ALL SCREEN SIZES
+   ══════════════════════════════════ */
+
+/* Large desktops (≤1400px) */
+@media (max-width: 1400px) {
+  .experience {
+    padding: 100px 80px;
+  }
+}
+
+/* Laptops (≤1200px) */
 @media (max-width: 1200px) {
   .experience {
     padding: 80px 60px;
   }
+
+  .experience-title {
+    font-size: 44px;
+  }
 }
 
+/* Tablets landscape (≤1024px) */
+@media (max-width: 1024px) {
+  .experience {
+    padding: 70px 50px;
+  }
+
+  .experience-title {
+    font-size: 40px;
+    margin-bottom: 60px;
+  }
+
+  .experience-card,
+  .currently-working {
+    padding: 35px;
+  }
+}
+
+/* Tablets portrait (≤768px) */
 @media (max-width: 768px) {
   .experience {
     padding: 60px 30px;
@@ -163,6 +231,21 @@
   .experience-card,
   .currently-working {
     padding: 30px;
+    margin-bottom: 24px;
+  }
+
+  /* Reduce slide distance on tablet */
+  .slide-left {
+    transform: translateX(-60px);
+  }
+
+  .slide-right {
+    transform: translateX(60px);
+  }
+
+  .slide-left.animate-in,
+  .slide-right.animate-in {
+    transform: translateX(0);
   }
 
   .experience-header {
@@ -170,8 +253,21 @@
     gap: 15px;
   }
 
+  .experience-icon {
+    width: 52px;
+    height: 52px;
+  }
+
   .experience-info h3 {
     font-size: 20px;
+  }
+
+  .company-name {
+    font-size: 15px;
+  }
+
+  .experience-date {
+    font-size: 14px;
   }
 
   .currently-working h3 {
@@ -180,7 +276,136 @@
 
   .experience-responsibilities li,
   .working-list li {
+    font-size: 15px;
     text-align: left;
   }
 }
 
+/* Large phones (≤640px) */
+@media (max-width: 640px) {
+  .experience {
+    padding: 50px 24px;
+  }
+
+  .experience-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  .experience-card,
+  .currently-working {
+    padding: 26px 22px;
+    margin-bottom: 18px;
+  }
+
+  .experience-info h3,
+  .currently-working h3 {
+    font-size: 19px;
+  }
+
+  .experience-responsibilities li,
+  .working-list li {
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+}
+
+/* Standard phones (≤480px) — switch to slide up */
+@media (max-width: 480px) {
+  .experience {
+    padding: 50px 20px;
+  }
+
+  .experience-title {
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  /* Switch from horizontal to vertical slide */
+  .slide-left,
+  .slide-right {
+    transform: translateY(40px);
+  }
+
+  .slide-left.animate-in,
+  .slide-right.animate-in {
+    transform: translateY(0);
+  }
+
+  .experience-card,
+  .currently-working {
+    padding: 25px 20px;
+  }
+
+  .experience-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .experience-info h3,
+  .currently-working h3 {
+    font-size: 18px;
+  }
+
+  .experience-responsibilities li,
+  .working-list li {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+}
+
+/* Small phones (≤380px) */
+@media (max-width: 380px) {
+  .experience {
+    padding: 40px 15px;
+  }
+
+  .experience-title {
+    font-size: 26px;
+    margin-bottom: 32px;
+  }
+
+  .experience-card,
+  .currently-working {
+    padding: 20px 16px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+  }
+
+  .experience-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .experience-info h3,
+  .currently-working h3 {
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+
+  .company-name {
+    font-size: 13px;
+  }
+
+  .experience-date {
+    font-size: 12px;
+  }
+
+  .experience-responsibilities li,
+  .working-list li {
+    font-size: 13px;
+    line-height: 1.6;
+    padding-left: 20px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .experience-card,
+  .currently-working,
+  .experience-title {
+    opacity: 1;
+    transform: none;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+}

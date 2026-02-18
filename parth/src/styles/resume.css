@@ -60,10 +60,29 @@
   height: 20px;
 }
 
-/* Responsive Design */
+/* ══════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════ */
+
+@media (max-width: 1400px) {
+  .resume {
+    padding: 100px 80px;
+  }
+}
+
 @media (max-width: 1200px) {
   .resume {
     padding: 100px 60px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .resume {
+    padding: 90px 40px;
+  }
+
+  .resume-title {
+    font-size: 42px;
   }
 }
 
@@ -95,5 +114,68 @@
   .resume-download-btn {
     padding: 14px 30px;
     font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume {
+    padding: 60px 20px;
+  }
+
+  .resume-icon-wrapper {
+    width: 85px;
+    height: 85px;
+    margin-bottom: 24px;
+  }
+
+  .resume-icon-wrapper svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .resume-title {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+
+  .resume-description {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .resume-download-btn {
+    padding: 13px 26px;
+    font-size: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .resume {
+    padding: 50px 15px;
+  }
+
+  .resume-icon-wrapper {
+    width: 75px;
+    height: 75px;
+  }
+
+  .resume-icon-wrapper svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .resume-title {
+    font-size: 26px;
+  }
+
+  .resume-description {
+    font-size: 14px;
+  }
+
+  .resume-download-btn {
+    font-size: 14px;
+    padding: 12px 20px;
   }
 }

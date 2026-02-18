@@ -3,16 +3,18 @@ import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setActiveSection(sectionId);
+      setMenuOpen(false); // close menu after clicking a link
     }
   };
 
-  // Optional: Auto-detect which section is in view
+  // Auto-detect which section is in view
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'projects', 'resume', 'contact'];
@@ -37,7 +39,18 @@ const Navbar = () => {
     <nav className="navbar">
       <h2 className="logo">WELCOME.</h2>
 
-      <ul className="nav-links">
+      {/* Hamburger button — only visible on mobile */}
+      <button
+        className={`hamburger ${menuOpen ? 'open' : ''}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+
+      <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <li 
           onClick={() => scrollToSection('home')}
           className={activeSection === 'home' ? 'active' : ''}

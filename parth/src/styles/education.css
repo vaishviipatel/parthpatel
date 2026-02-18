@@ -8,13 +8,26 @@
   margin: 0 auto;
 }
 
+/* ── Title ── */
 .education-title {
   font-size: 48px;
   font-weight: 700;
   text-align: center;
   color: #1a1a1a;
   margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
+
+.education-title.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════
+   CARD — hidden initial states
+   ══════════════════════════════════ */
 
 .education-card {
   background-color: #ffffff;
@@ -22,15 +35,44 @@
   border-radius: 16px;
   padding: 40px;
   margin-bottom: 30px;
-  transition: all 0.3s ease;
   cursor: pointer;
+  transition:
+    transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
-.education-card:hover {
+/* Card 1 — starts off-screen to the LEFT */
+.education-card.slide-left {
+  opacity: 0;
+  transform: translateX(-160px);
+}
+
+/* Card 2 — starts off-screen to the RIGHT */
+.education-card.slide-right {
+  opacity: 0;
+  transform: translateX(160px);
+  transition-delay: 0.3s;
+}
+
+/* ── Both slide to center when visible ── */
+.education-card.slide-left.animate-in,
+.education-card.slide-right.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Hover ── */
+.education-card.animate-in:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
   border-color: #4c8bf5;
 }
+
+/* ══════════════════════════════════
+   CONTENT STYLES
+   ══════════════════════════════════ */
 
 .education-header {
   display: flex;
@@ -93,13 +135,53 @@
   margin-bottom: 0;
 }
 
-/* Responsive Design */
+/* ══════════════════════════════════
+   RESPONSIVE — ALL SCREEN SIZES
+   ══════════════════════════════════ */
+
+/* Large desktops (≤1400px) */
+@media (max-width: 1400px) {
+  .education {
+    padding: 100px 80px;
+  }
+}
+
+/* Laptops (≤1200px) */
 @media (max-width: 1200px) {
   .education {
     padding: 80px 60px;
   }
+
+  .education-title {
+    font-size: 44px;
+  }
+
+  .education-details {
+    padding-left: 60px;
+  }
 }
 
+/* Tablets landscape (≤1024px) */
+@media (max-width: 1024px) {
+  .education {
+    padding: 70px 50px;
+  }
+
+  .education-title {
+    font-size: 40px;
+    margin-bottom: 60px;
+  }
+
+  .education-card {
+    padding: 35px;
+  }
+
+  .education-details {
+    padding-left: 40px;
+  }
+}
+
+/* Tablets portrait (≤768px) */
 @media (max-width: 768px) {
   .education {
     padding: 60px 30px;
@@ -115,16 +197,168 @@
     margin-bottom: 20px;
   }
 
+  /* Reduce slide distance on tablet */
+  .education-card.slide-left {
+    transform: translateX(-60px);
+  }
+
+  .education-card.slide-right {
+    transform: translateX(60px);
+  }
+
+  .education-card.slide-left.animate-in,
+  .education-card.slide-right.animate-in {
+    transform: translateX(0);
+  }
+
   .education-header {
     flex-direction: column;
     gap: 15px;
+  }
+
+  .education-icon {
+    width: 52px;
+    height: 52px;
   }
 
   .education-info h3 {
     font-size: 20px;
   }
 
+  .university-name {
+    font-size: 15px;
+  }
+
+  .education-date {
+    font-size: 14px;
+  }
+
   .education-details {
     padding-left: 0;
+  }
+
+  .education-details p {
+    font-size: 15px;
+  }
+}
+
+/* Large phones (≤640px) */
+@media (max-width: 640px) {
+  .education {
+    padding: 50px 24px;
+  }
+
+  .education-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  .education-card {
+    padding: 26px 22px;
+    margin-bottom: 18px;
+  }
+
+  .education-info h3 {
+    font-size: 19px;
+  }
+
+  .education-details p {
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+}
+
+/* Standard phones (≤480px) — switch to slide up */
+@media (max-width: 480px) {
+  .education {
+    padding: 50px 20px;
+  }
+
+  .education-title {
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  /* Switch from horizontal slide to vertical on small screens */
+  .education-card.slide-left,
+  .education-card.slide-right {
+    transform: translateY(40px);
+  }
+
+  .education-card.slide-left.animate-in,
+  .education-card.slide-right.animate-in {
+    transform: translateY(0);
+  }
+
+  .education-card {
+    padding: 25px 20px;
+  }
+
+  .education-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .education-info h3 {
+    font-size: 18px;
+  }
+
+  .university-name {
+    font-size: 14px;
+  }
+
+  .education-details p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+}
+
+/* Small phones (≤380px) */
+@media (max-width: 380px) {
+  .education {
+    padding: 40px 15px;
+  }
+
+  .education-title {
+    font-size: 26px;
+    margin-bottom: 32px;
+  }
+
+  .education-card {
+    padding: 20px 16px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+  }
+
+  .education-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .education-info h3 {
+    font-size: 16px;
+  }
+
+  .university-name {
+    font-size: 13px;
+  }
+
+  .education-date {
+    font-size: 12px;
+  }
+
+  .education-details p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .education-card,
+  .education-title {
+    opacity: 1;
+    transform: none;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
   }
 }

@@ -1,10 +1,91 @@
+import { useEffect, useRef } from "react";
 import "../styles/skills.css";
 
+const SPIN_DURATION = 2200; 
+const GAP_BETWEEN_CARDS = 150; 
+const GAP_BETWEEN_SECTIONS = 400; 
+
 const Skills = () => {
+  const titleRef = useRef(null);
+  const containerRef = useRef(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    // ── Title fade-in ──
+    const titleObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          titleObserver.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (titleRef.current) titleObserver.observe(titleRef.current);
+
+    
+    const animateCard = (card, startAt) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          card.classList.add("spin-in");
+          setTimeout(() => {
+            card.classList.remove("spin-in");
+            card.classList.add("spin-done");
+            resolve(); 
+          }, SPIN_DURATION);
+        }, startAt);
+      });
+    };
+
+   
+    const animateSection = async (sectionEl) => {
+      const cards = Array.from(sectionEl.querySelectorAll(".skill-card"));
+      for (const card of cards) {
+        await animateCard(card, 0);          
+        await delay(GAP_BETWEEN_CARDS);     
+      }
+    };
+
+    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+    
+    const runAllSequentially = async (sections) => {
+      for (const section of sections) {
+        await animateSection(section);       
+        await delay(GAP_BETWEEN_SECTIONS);   
+      }
+    };
+
+    
+    const containerObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          containerObserver.unobserve(entry.target);
+
+          const sections = Array.from(
+            entry.target.querySelectorAll(".skills-category")
+          );
+          runAllSequentially(sections);
+        }
+      },
+      { threshold: 0.05 } 
+    );
+
+    if (containerRef.current) {
+      containerObserver.observe(containerRef.current);
+    }
+
+    return () => {
+      titleObserver.disconnect();
+      containerObserver.disconnect();
+    };
+  }, []);
+
   return (
-    <section className="skills" id="skills">
+    <section className="skills" id="skills" ref={containerRef}>
       <div className="skills-container">
-        <h2 className="skills-title">Skills & Tech Stack</h2>
+        <h2 className="skills-title" ref={titleRef}>Skills & Tech Stack</h2>
 
         {/* Language Section */}
         <div className="skills-category">
@@ -22,11 +103,10 @@ const Skills = () => {
               <h4>Git</h4>
               <p>Version control, collaboration</p>
             </div>
-            
           </div>
         </div>
 
-        {/* ML section */}
+        {/* ML Section */}
         <div className="skills-category">
           <h3 className="category-title">Machine Learning</h3>
           <div className="skills-grid">
@@ -35,22 +115,22 @@ const Skills = () => {
               <p>ML algorithms, model building</p>
             </div>
             <div className="skill-card">
-               <h4>Supervised Learning</h4>
+              <h4>Supervised Learning</h4>
               <p>Classification, regression models</p>
             </div>
             <div className="skill-card">
-               <h4>Unsupervised Learning</h4>
+              <h4>Unsupervised Learning</h4>
               <p>Clustering, dimensionality reduction</p>
             </div>
-             <div className="skill-card">
-               <h4>Data Classification</h4>
+            <div className="skill-card">
+              <h4>Data Classification</h4>
               <p>Feature engineering, prediction</p>
             </div>
             <div className="skill-card">
               <h4>Model Validation</h4>
               <p>Cross-validation, performance metrics</p>
             </div>
-             <div className="skill-card">
+            <div className="skill-card">
               <h4>NLP</h4>
               <p>Text processing, Tfidf, BOW</p>
             </div>
@@ -68,7 +148,6 @@ const Skills = () => {
             <div className="skill-card">
               <h4>Keras</h4>
               <p>High-level API, rapid prototyping</p>
-
             </div>
             <div className="skill-card">
               <h4>CNN</h4>
@@ -89,8 +168,7 @@ const Skills = () => {
           </div>
         </div>
 
-
-        {/* Deployment section */}
+        {/* Deployment Section */}
         <div className="skills-category">
           <h3 className="category-title">Deployment</h3>
           <div className="skills-grid">
@@ -99,27 +177,24 @@ const Skills = () => {
               <p>REST APIs, model serving</p>
             </div>
             <div className="skill-card">
-               <h4>Docker</h4>
+              <h4>Docker</h4>
               <p>Containerization, reproducibility</p>
             </div>
             <div className="skill-card">
-               <h4>CI/CD Pipelines</h4>
+              <h4>CI/CD Pipelines</h4>
               <p>Automated testing, deployment workflows</p>
             </div>
-             <div className="skill-card">
-               <h4>Model Monitoring</h4>
+            <div className="skill-card">
+              <h4>Model Monitoring</h4>
               <p>Performance tracking, drift detection</p>
             </div>
             <div className="skill-card">
-               <h4>Github Actions</h4>
+              <h4>Github Actions</h4>
               <p>Automated workflows, testing, deployment</p>
             </div>
-            
           </div>
         </div>
 
-
-        
       </div>
     </section>
   );

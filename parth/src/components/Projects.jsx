@@ -1,6 +1,16 @@
+import { useEffect, useRef } from "react";
 import "../styles/projects.css";
 
+const BORDER_DURATION = 1000;   // ms — border draw (slower)
+const CONTENT_DURATION = 1600;  // ms — content reveal (much slower)
+const GAP_BETWEEN_CARDS = 400;  // ms — pause before next card
+
 const Projects = () => {
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const listRef = useRef(null);
+  const hasAnimated = useRef(false);
+
   const projects = [
     {
       title: "Market Anomaly Detection System",
@@ -41,7 +51,6 @@ const Projects = () => {
         { left: "Analyzes multiple health indicators", right: "Provides risk assessment scores" }
       ],
       technologies: ["Python", "LightGBM", "CatBoost", "XGBoost", "Scikit-Learn", "Pandas"],
-      
       kaggle: "https://www.kaggle.com/code/patelparth3399/diabetes-prediction-challenge-lgbm-catb-xgb"
     },
     {
@@ -56,13 +65,83 @@ const Projects = () => {
     }
   ];
 
+  useEffect(() => {
+    // ── Title + subtitle fade in ──
+    const headingObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+            headingObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    if (titleRef.current) headingObserver.observe(titleRef.current);
+    if (subtitleRef.current) headingObserver.observe(subtitleRef.current);
+
+    // ── Animate one card: border draws → content flies in → done ──
+    const animateCard = (card) => {
+      return new Promise((resolve) => {
+        // Step 1: draw the border slowly
+        card.classList.add("border-draw");
+
+        setTimeout(() => {
+          // Step 2: reveal content slowly from center
+          card.classList.add("content-reveal");
+
+          setTimeout(() => {
+            // Step 3: settle — card is fully done
+            card.classList.remove("border-draw", "content-reveal");
+            card.classList.add("card-done");
+            resolve();
+          }, CONTENT_DURATION);
+
+        }, BORDER_DURATION);
+      });
+    };
+
+    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+    // ── All cards strictly one after another ──
+    const runSequentially = async (cards) => {
+      for (const card of cards) {
+        await animateCard(card);
+        await delay(GAP_BETWEEN_CARDS);
+      }
+    };
+
+    // ── Trigger when projects list enters viewport ──
+    const listObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          listObserver.unobserve(entry.target);
+          const cards = Array.from(entry.target.querySelectorAll(".project-card"));
+          runSequentially(cards);
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    if (listRef.current) listObserver.observe(listRef.current);
+
+    return () => {
+      headingObserver.disconnect();
+      listObserver.disconnect();
+    };
+  }, []);
+
   return (
     <section className="projects" id="projects">
       <div className="projects-container">
-        <h2 className="projects-title">Projects</h2>
-        <p className="projects-subtitle">Building end-to-end ML & DL solutions with real-world impact</p>
+        <h2 className="projects-title" ref={titleRef}>Projects</h2>
+        <p className="projects-subtitle" ref={subtitleRef}>
+          Building end-to-end ML & DL solutions with real-world impact
+        </p>
 
-        <div className="projects-list">
+        <div className="projects-list" ref={listRef}>
           {projects.map((project, index) => (
             <div key={index} className="project-card">
               <div className="project-content">
@@ -87,7 +166,6 @@ const Projects = () => {
               </div>
 
               <div className="project-actions">
-                {/* GitHub button - only show if link exists */}
                 {project.github && (
                   <a
                     href={project.github}
@@ -102,7 +180,6 @@ const Projects = () => {
                   </a>
                 )}
 
-                {/* Kaggle button - only show if link exists */}
                 {project.kaggle && (
                   <a
                     href={project.kaggle}

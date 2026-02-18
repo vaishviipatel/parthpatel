@@ -1,3 +1,7 @@
+/* ══════════════════════════════════
+   ABOUT SECTION
+   ══════════════════════════════════ */
+
 .about {
   padding: 100px 120px;
   background-color: #fafafa;
@@ -9,71 +13,221 @@
   padding: 0 40px;
 }
 
+/* ── Title ── */
 .about-title {
   font-size: 48px;
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 60px;
   text-align: center;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
+.about-title.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Content wrapper ── */
 .about-content {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
+/* ── Paragraphs — fade up one by one ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-up:nth-child(1) { transition-delay: 0.1s; }
+.fade-up:nth-child(2) { transition-delay: 0.25s; }
+.fade-up:nth-child(3) { transition-delay: 0.4s; }
+.fade-up:nth-child(4) { transition-delay: 0.55s; }
+
+.fade-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Text styles ── */
 .about-content p {
   font-size: 19px;
-  line-height: 1.7;
+  line-height: 1.8;
   color: #4a4a4a;
-  text-align: justify; /* Changed from left to justify */
-  text-justify: inter-word; /* Better word spacing */
+  text-align: justify;
+  text-justify: inter-word;
   margin: 0;
-  text-indent: 0;
 }
 
-.about-intro {
-  font-size: 19px;
-  color: #4a4a4a;
-}
-
-.about-focus {
-  font-size: 19px;
-}
+.about-intro  { font-size: 19px; color: #4a4a4a; }
+.about-focus  { font-size: 19px; }
+.about-current { font-size: 19px; color: #4a4a4a; }
 
 .highlight {
   color: #4c8bf5;
   font-weight: 400;
 }
 
-.about-current {
-  font-size: 19px;
-  color: #4a4a4a;
-}
+/* ══════════════════════════════════
+   RESPONSIVE — all screen sizes
+   ══════════════════════════════════ */
 
-/* Responsive Design */
+/* Large desktops (1400px+) — already handled by max-width on container */
+
+/* Medium desktops / laptops */
 @media (max-width: 1200px) {
   .about {
     padding: 80px 60px;
   }
+
+  .about-container {
+    padding: 0 20px;
+  }
+
+  .about-title {
+    font-size: 42px;
+  }
+
+  .about-content p,
+  .about-intro,
+  .about-focus,
+  .about-current {
+    font-size: 18px;
+  }
 }
 
+/* Tablets landscape */
+@media (max-width: 1024px) {
+  .about {
+    padding: 70px 50px;
+  }
+
+  .about-title {
+    font-size: 38px;
+    margin-bottom: 50px;
+  }
+
+  .about-content {
+    gap: 25px;
+  }
+
+  .about-content p,
+  .about-intro,
+  .about-focus,
+  .about-current {
+    font-size: 17px;
+  }
+}
+
+/* Tablets portrait */
 @media (max-width: 768px) {
   .about {
     padding: 60px 30px;
   }
 
+  .about-container {
+    padding: 0;
+  }
+
   .about-title {
-    font-size: 36px;
+    font-size: 34px;
     margin-bottom: 40px;
   }
 
-  .about-content p {
-    font-size: 16px;
+  .about-content {
+    gap: 22px;
   }
 
-  .about-intro {
-    font-size: 17px;
+  .about-content p,
+  .about-intro,
+  .about-focus,
+  .about-current {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+}
+
+/* Large phones */
+@media (max-width: 640px) {
+  .about {
+    padding: 50px 24px;
+  }
+
+  .about-title {
+    font-size: 30px;
+    margin-bottom: 35px;
+  }
+
+  .about-content {
+    gap: 20px;
+  }
+
+  .about-content p,
+  .about-intro,
+  .about-focus,
+  .about-current {
+    font-size: 15px;
+    line-height: 1.7;
+    /* On small screens left-align reads better than justify */
+    text-align: left;
+  }
+}
+
+/* Standard phones */
+@media (max-width: 480px) {
+  .about {
+    padding: 45px 18px;
+  }
+
+  .about-title {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+  .about-content {
+    gap: 18px;
+  }
+
+  .about-content p,
+  .about-intro,
+  .about-focus,
+  .about-current {
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+}
+
+/* Small phones (iPhone SE, Galaxy A series etc.) */
+@media (max-width: 380px) {
+  .about {
+    padding: 40px 15px;
+  }
+
+  .about-title {
+    font-size: 24px;
+    margin-bottom: 28px;
+  }
+
+  .about-content p,
+  .about-intro,
+  .about-focus,
+  .about-current {
+    font-size: 14px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .about-title,
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
