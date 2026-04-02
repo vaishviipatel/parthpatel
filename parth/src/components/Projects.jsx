@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import "../styles/projects.css";
 
-const BORDER_DURATION = 1000;   // ms — border draw (slower)
-const CONTENT_DURATION = 1600;  // ms — content reveal (much slower)
-const GAP_BETWEEN_CARDS = 400;  // ms — pause before next card
+const BORDER_DURATION = 400;   // ms — border draw (slower)
+const CONTENT_DURATION = 600;  // ms — content reveal (much slower)
+const GAP_BETWEEN_CARDS = 250;  // ms — pause before next card
 
 const Projects = () => {
   const titleRef = useRef(null);
