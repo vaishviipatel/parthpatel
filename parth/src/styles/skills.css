@@ -8,7 +8,6 @@
   margin: 0 auto;
 }
 
-
 .skills-title {
   font-size: 48px;
   font-weight: 700;
@@ -17,7 +16,7 @@
   margin-bottom: 80px;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .skills-title.animate-in {
@@ -46,36 +45,43 @@
 .skill-card {
   background-color: #ffffff;
   border: 2px solid #e5e7eb;
+  border-left: 3px solid transparent;
   border-radius: 12px;
-  padding: 30px 25px;
+  padding: 18px 25px;
   cursor: pointer;
   opacity: 0;
 }
 
-
-@keyframes fullSpin {
+/* ── Merged animation: blur lift + slide from left + blue left border ── */
+@keyframes blurSlideIn {
   0% {
     opacity: 0;
-    transform: rotateY(0deg) scale(0.75);
+    filter: blur(10px);
+    transform: translateX(-20px) scale(0.97);
+    border-left-color: #4c8bf5;
   }
-  10% {
+  55% {
     opacity: 1;
+    filter: blur(0px);
+    transform: translateX(0px) scale(1);
+    border-left-color: #4c8bf5;
   }
   100% {
     opacity: 1;
-    transform: rotateY(1620deg) scale(1);
+    filter: blur(0px);
+    transform: translateX(0px) scale(1);
+    border-left-color: transparent;
   }
 }
 
-
-.skill-card.spin-in {
-  animation: fullSpin 2.2s ease-in-out forwards;
+.skill-card.blur-slide-in {
+  animation: blurSlideIn 0.75s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-
-.skill-card.spin-done {
+/* ── Settled state after animation ── */
+.skill-card.card-done {
   opacity: 1;
-  transform: none;
+  border-left-color: transparent;
   transition:
     transform 0.3s ease,
     border-color 0.3s ease,
@@ -83,9 +89,10 @@
     background-color 0.3s ease;
 }
 
-.skill-card.spin-done:hover {
+.skill-card.card-done:hover {
   transform: translateY(-3px);
-  border-color: #4c8bf5;
+  border-color: #e5e7eb;
+  border-left-color: #4c8bf5;
   box-shadow: 0 10px 40px rgba(76, 139, 245, 0.4);
   background-color: #f8fbff;
 }
@@ -105,131 +112,213 @@
 }
 
 /* ══════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — ALL SCREEN SIZES
    ══════════════════════════════════ */
 
+/* Large desktops (≤1400px) */
 @media (max-width: 1400px) {
   .skills {
     padding: 100px 80px;
   }
 }
 
+/* Laptops (≤1200px) */
 @media (max-width: 1200px) {
   .skills {
     padding: 80px 60px;
   }
-  .skills-grid {
-    gap: 20px;
+
+  .skills-title {
+    font-size: 44px;
   }
 }
 
+/* Tablets landscape (≤1024px) */
 @media (max-width: 1024px) {
   .skills {
-    padding: 80px 40px;
+    padding: 70px 50px;
   }
+
   .skills-title {
-    font-size: 42px;
+    font-size: 40px;
     margin-bottom: 60px;
   }
+
   .category-title {
-    font-size: 26px;
+    font-size: 24px;
+    margin-bottom: 24px;
   }
+
+  .skills-category {
+    margin-bottom: 50px;
+  }
+
+  .skill-card {
+    padding: 16px 22px;
+  }
+
   .skill-card h4 {
     font-size: 18px;
   }
-}
 
-@media (max-width: 968px) {
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .skills {
-    padding: 70px 30px;
-  }
-  .skills-title {
-    font-size: 38px;
-    margin-bottom: 55px;
-  }
-  .skills-category {
-    margin-bottom: 45px;
-  }
-}
-
-@media (max-width: 640px) {
-  .skills {
-    padding: 60px 30px;
-  }
-  .skills-title {
-    font-size: 36px;
-    margin-bottom: 50px;
-  }
-  .category-title {
-    font-size: 24px;
-  }
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  .skill-card {
-    padding: 25px 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .skills {
-    padding: 50px 16px;
-  }
-  .skills-title {
-    font-size: 30px;
-    margin-bottom: 40px;
-  }
-  .category-title {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-  .skills-category {
-    margin-bottom: 36px;
-  }
-  .skill-card {
-    padding: 22px 18px;
-  }
-  .skill-card h4 {
-    font-size: 17px;
-  }
   .skill-card p {
     font-size: 14px;
   }
 }
 
+/* Tablets portrait (≤768px) — switch to 2 column grid */
+@media (max-width: 768px) {
+  .skills {
+    padding: 60px 30px;
+  }
+
+  .skills-title {
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+
+  .skills-category {
+    margin-bottom: 40px;
+  }
+
+  .category-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .skill-card {
+    padding: 14px 20px;
+  }
+
+  .skill-card h4 {
+    font-size: 17px;
+  }
+
+  .skill-card p {
+    font-size: 14px;
+  }
+}
+
+/* Large phones (≤640px) */
+@media (max-width: 640px) {
+  .skills {
+    padding: 50px 24px;
+  }
+
+  .skills-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .skill-card {
+    padding: 12px 16px;
+  }
+
+  .skill-card h4 {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .skill-card p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+/* Standard phones (≤480px) — single column */
+@media (max-width: 480px) {
+  .skills {
+    padding: 50px 20px;
+  }
+
+  .skills-title {
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .category-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .skills-category {
+    margin-bottom: 34px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .skill-card {
+    padding: 12px 18px;
+  }
+
+  .skill-card h4 {
+    font-size: 16px;
+  }
+
+  .skill-card p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* Small phones (≤380px) */
 @media (max-width: 380px) {
   .skills {
-    padding: 40px 14px;
+    padding: 40px 15px;
   }
+
   .skills-title {
     font-size: 26px;
     margin-bottom: 32px;
   }
+
   .category-title {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 14px;
   }
+
+  .skills-category {
+    margin-bottom: 28px;
+  }
+
   .skill-card {
-    padding: 18px 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
   }
+
   .skill-card h4 {
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  .skill-card p {
+    font-size: 13px;
+    line-height: 1.5;
   }
 }
 
+/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .skill-card {
     opacity: 1;
     animation: none;
   }
+
   .skills-title {
     opacity: 1;
     transform: none;
+    transition: none;
   }
 }

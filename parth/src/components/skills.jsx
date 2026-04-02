@@ -1,9 +1,7 @@
 import { useEffect, useRef } from "react";
 import "../styles/skills.css";
 
-const SPIN_DURATION = 2200; 
-const GAP_BETWEEN_CARDS = 150; 
-const GAP_BETWEEN_SECTIONS = 400; 
+const GAP_BETWEEN_CARDS = 200;
 
 const Skills = () => {
   const titleRef = useRef(null);
@@ -23,40 +21,38 @@ const Skills = () => {
     );
     if (titleRef.current) titleObserver.observe(titleRef.current);
 
-    
-    const animateCard = (card, startAt) => {
+    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+    const animateCard = (card) => {
       return new Promise((resolve) => {
-        setTimeout(() => {
-          card.classList.add("spin-in");
-          setTimeout(() => {
-            card.classList.remove("spin-in");
-            card.classList.add("spin-done");
-            resolve(); 
-          }, SPIN_DURATION);
-        }, startAt);
+        card.classList.add("blur-slide-in");
+        const onEnd = () => {
+          card.classList.remove("blur-slide-in");
+          card.classList.add("card-done");
+          resolve();
+        };
+        card.addEventListener("animationend", onEnd, { once: true });
       });
     };
 
-   
     const animateSection = async (sectionEl) => {
       const cards = Array.from(sectionEl.querySelectorAll(".skill-card"));
       for (const card of cards) {
-        await animateCard(card, 0);          
-        await delay(GAP_BETWEEN_CARDS);     
+        animateCard(card);
+        await delay(GAP_BETWEEN_CARDS);
       }
     };
 
-    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-    
     const runAllSequentially = async (sections) => {
       for (const section of sections) {
-        await animateSection(section);       
-        await delay(GAP_BETWEEN_SECTIONS);   
+        const cards = Array.from(section.querySelectorAll(".skill-card"));
+        for (const card of cards) {
+          animateCard(card);
+          await delay(GAP_BETWEEN_CARDS);
+        }
       }
     };
 
-    
     const containerObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated.current) {
@@ -69,7 +65,7 @@ const Skills = () => {
           runAllSequentially(sections);
         }
       },
-      { threshold: 0.05 } 
+      { threshold: 0.05 }
     );
 
     if (containerRef.current) {
