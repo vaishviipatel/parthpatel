@@ -15,6 +15,7 @@ app.use(express.json({ limit: '10kb' }));
 app.use(cors({
   origin: [
     process.env.FRONTEND_URL || 'http://localhost:5173',
+    'https://parthpatelap.netlify.app',
     'http://localhost:3000',
   ],
   methods: ['POST'],

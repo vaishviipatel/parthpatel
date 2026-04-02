@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FaLinkedin, FaGithub, FaKaggle } from 'react-icons/fa';
 import "../styles/Contact.css";
 
+const API_URL = "https://parthpatel.onrender.com/api/contact";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -24,7 +26,7 @@ const Contact = () => {
     setStatus("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
